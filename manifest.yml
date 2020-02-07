@@ -1,8 +1,0 @@
----
-applications:
-- name: dfw-portal
-  memory: 1GB
-  instances: 1
-  random-route: true
-  buildpacks:
-  - https://github.com/cloudfoundry/java-buildpack.git
