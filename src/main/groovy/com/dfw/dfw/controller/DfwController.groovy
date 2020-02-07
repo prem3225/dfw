@@ -1,6 +1,7 @@
 package com.dfw.dfw.controller
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -17,5 +18,10 @@ class DfwController {
 	@PostMapping("/user")
 	def saveUser(@RequestBody User user) {
 		dfwService.saveUser(user)
+	}
+	
+	@GetMapping("/users")
+	def saveUser() {
+		dfwService.getAllUsers()
 	}
 }

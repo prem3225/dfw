@@ -15,4 +15,8 @@ class DfwService {
 	def saveUser(User user) {
 		return userRepository.save(user)
 	}
+	
+	def getAllUsers() {
+		userRepository.findAll()
+	}
 }
