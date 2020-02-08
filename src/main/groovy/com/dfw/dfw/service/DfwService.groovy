@@ -13,23 +13,26 @@ class DfwService {
 	UserRepository userRepository
 	
 	def saveUser(User user) {
-		int emailCount = userRepository.findByEmail(user.emailAddress)
-		int phoneCount = userRepository.findByPhoneNumber(user.phoneNumber)
-		if(emailCount>0 && phoneCount==0) {
-			return ["result" : "Email Already Exist"]
-		}
-		
-		if(phoneCount>0 && emailCount==0) {
+		String email = userRepository.findByEmail(user.emailAddress.toLowerCase())
+		String phone = userRepository.findByPhoneNumber(user.phoneNumber)
+		if(!email && phone) {
 			return ["result" : "Phone Number Already Exist"]
 		}
-		if(emailCount>0 && phoneCount>0) {
+		
+		if(email && !phone) {
+				return ["result" : "Email Already Exist"]
+		}
+		
+		if(email && phone) {
 			return ["result" : "Email address and phone number already exist"]
 		}
-		if(emailCount==0 && phoneCount==0){
+		
+		if(!email && !phone)
+			user.emailAddress=user.emailAddress.toLowerCase()
 			userRepository.save(user)
-			return ["result" : "Successfully REgistered"]
+			return ["result" : "Successfully Registered"]
 		}
-	}
+	
 	
 	def getAllUsers() {
 		userRepository.findAll()
