@@ -43,8 +43,8 @@ class DfwService {
 					MimeMessageHelper helper = new MimeMessageHelper(message);
 					 
 					helper.setTo(user.emailAddress);
-					helper.setText("Welcome to DFW");
-					helper.setSubject("Your registration was successfully made. And you can login with your registered mail id and password.");
+					helper.setSubject("Registered successfully DFW");
+					helper.setText("Your registration was successfully made. And you can login with your registered mail id and password.");
 					 
 					sender.send(message);
 				}catch(Exception e) {
