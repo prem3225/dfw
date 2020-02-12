@@ -19,6 +19,9 @@ class DfwService {
 	@Autowired
 	private JavaMailSender sender;
 	
+	@Autowired 
+	DfwServiceUtils dfwServiceUtils
+	
 	def saveUser(User user) {
 		String email = userRepository.findByEmail(user.emailAddress.toLowerCase())
 		String phone = userRepository.findByPhoneNumber(user.phoneNumber)
@@ -36,6 +39,8 @@ class DfwService {
 		
 		if(!email && !phone)
 			user.emailAddress=user.emailAddress.toLowerCase()
+			println "enter----"
+			user.password=dfwServiceUtils.alphaNumericString(8)
 			User userSaved = userRepository.save(user)
 			if(userSaved) {
 				try {
@@ -44,7 +49,7 @@ class DfwService {
 					 
 					helper.setTo(user.emailAddress);
 					helper.setSubject("Registered successfully DFW");
-					helper.setText("Your registration was successfully made. And you can login with your registered mail id and password.");
+					helper.setText("Your registration was successfully made. And you can login with your registered mail id and with temporary password("+user.password+")" );
 					 
 					sender.send(message);
 				}catch(Exception e) {

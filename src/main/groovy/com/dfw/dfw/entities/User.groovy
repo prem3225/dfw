@@ -31,4 +31,7 @@ class User {
 	@Column(name="user_type")
 	String userType
 	
+	@Column(name="password")
+	String password
+	
 }
